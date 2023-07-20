@@ -151,6 +151,9 @@ Node3D* Algorithm::hybridAStar(Node3D& start,
       // remove node from open list
       O.pop();
 
+      if (iterations % 1000 == 0) {
+        std::cout << "iterations: " << iterations << std::endl;
+      }
       // _________
       // GOAL TEST
       if (*nPred == goal || iterations > Constants::iterations) {

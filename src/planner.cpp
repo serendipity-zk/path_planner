@@ -114,7 +114,7 @@ void Planner::setStart(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr&
     validStart = true;
     start = *initial;
 
-    if (Constants::manual) { plan();}
+    // if (Constants::manual) { plan();}
 
     // publish start for RViz
     pubStart.publish(startN);

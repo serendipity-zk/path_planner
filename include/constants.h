@@ -34,9 +34,9 @@ static const bool coutDEBUG = false;
 /// A flag for the mode (true = manual; false = dynamic). Manual for static map or dynamic for dynamic map.
 static const bool manual = true;
 /// A flag for the visualization of 3D nodes (true = on; false = off)
-static const bool visualization = false && manual;
+static const bool visualization = true && manual;
 /// A flag for the visualization of 2D nodes (true = on; false = off)
-static const bool visualization2D = false && manual;
+static const bool visualization2D = true && manual;
 /// A flag to toggle reversing (true = on; false = off)
 static const bool reverse = true;
 /// A flag to toggle the connection of the path via Dubin's shot (true = on; false = off)
@@ -58,15 +58,16 @@ static const bool twoD = true;
 /// [#] --- Limits the maximum search depth of the algorithm, possibly terminating without the solution
 static const int iterations = 30000;
 /// [m] --- Uniformly adds a padding around the vehicle
-static const double bloating = 0;
+static const double bloating = 2;
 /// [m] --- The width of the vehicle
-static const double width = 1.75 + 2 * bloating;
+static const double width = 3.3 + 2 * bloating;
 /// [m] --- The length of the vehicle
-static const double length = 2.65 + 2 * bloating;
+static const double length = 8 + 2 * bloating;
 /// [m] --- The minimum turning radius of the vehicle
-static const float r = 6;
+static const float r = 15;
 /// [m] --- The number of discretizations in heading
 static const int headings = 72;
+// static const int headings = 144;
 /// [°] --- The discretization value of the heading (goal condition)
 static const float deltaHeadingDeg = 360 / (float)headings;
 /// [c*M_PI] --- The discretization value of heading (goal condition)
@@ -93,9 +94,9 @@ static const float factor2D = sqrt(5) / sqrt(2) + 1;
 /// [#] --- A movement cost penalty for turning (choosing non straight motion primitives)
 static const float penaltyTurning = 1.05;
 /// [#] --- A movement cost penalty for reversing (choosing motion primitives > 2)
-static const float penaltyReversing = 2.0;
+static const float penaltyReversing = 1.5;
 /// [#] --- A movement cost penalty for change of direction (changing from primitives < 3 to primitives > 2)
-static const float penaltyCOD = 2.0;
+static const float penaltyCOD = 5.0;
 /// [m] --- The distance to the goal when the analytical solution (Dubin's shot) first triggers
 static const float dubinsShotDistance = 100;
 /// [m] --- The step size for the analytical solution (Dubin's shot) primarily relevant for collision checking
