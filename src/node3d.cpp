@@ -18,8 +18,8 @@ const int Node3D::dir = 3;
 // const float Node3D::dx[] = { 0.7068582,   0.705224,   0.705224};
 // const float Node3D::dt[] = { 0,         0.0570097,   -0.0570097};
 
-const float Node3D::dy[] = { 0,  -0.037,  0.037};
-const float Node3D::dx[] = { 0.75,   0.75,   0.75};
+const float Node3D::dy[] = { 0,  -0.03,  0.03};
+const float Node3D::dx[] = { 0.6,   0.6,   0.6};
 const float Node3D::dt[] = { 0,   0.05,   -0.05};
 // R = 3, 6.75 DEG
 //const float Node3D::dy[] = { 0,        -0.0207946, 0.0207946};

@@ -38,6 +38,10 @@ Node3D* Algorithm::hybridAStar(Node3D& start,
                                float* dubinsLookup,
                                Visualize& visualization) {
 
+    // int depth = Constants::headings;
+    // int length = width * height * depth;
+  // Node3D* nodes3D = new Node3D[length]();
+  // Node2D* nodes2D = new Node2D[width * height]();                              
   // PREDECESSOR AND SUCCESSOR INDEX
   int iPred, iSucc;
   float newG;
@@ -67,9 +71,8 @@ Node3D* Algorithm::hybridAStar(Node3D& start,
   // NODE POINTER
   Node3D* nPred;
   Node3D* nSucc;
-
+  cout<<"start "<< goal.getT() << endl;
   // float max = 0.f;
-
   // continue until O empty
   while (!O.empty()) {
 
@@ -160,7 +163,10 @@ Node3D* Algorithm::hybridAStar(Node3D& start,
         // DEBUG
         return nPred;
       }
-
+      // if ((int)nPred->getX() == (int)goal.getX() && (int)nPred->getY() == (int)goal.getY() || iterations > Constants::iterations) {
+      //   // DEBUG
+      //   return nPred;
+      // }
       // ____________________
       // CONTINUE WITH SEARCH
       else {
@@ -426,8 +432,21 @@ void updateH(Node3D& start, const Node3D& goal, Node2D* nodes2D, float* dubinsLo
     rsStart->setXY(start.getX(), start.getY());
     rsStart->setYaw(start.getT());
     rsEnd->setXY(goal.getX(), goal.getY());
+
+    // any goal heading
+    // float min_cost = std::numeric_limits<float>::infinity();
+    // for (int i = 0; i < Constants::headings; ++i) {
+    //   rsEnd->setYaw(i*Constants::deltaHeadingRad);
+    //   float cost = reedsSheppPath.distance(rsStart, rsEnd);
+    //   if (cost < min_cost) {
+    //     min_cost = cost;
+    //   }
+    // }
+    // reedsSheppCost = min_cost;
+    // // one goal heading
     rsEnd->setYaw(goal.getT());
     reedsSheppCost = reedsSheppPath.distance(rsStart, rsEnd);
+
     //    ros::Time t1 = ros::Time::now();
     //    ros::Duration d(t1 - t0);
     //    std::cout << "calculated Reed-Sheep Heuristic in ms: " << d * 1000 << std::endl;

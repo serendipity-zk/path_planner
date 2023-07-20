@@ -30,6 +30,7 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/path.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/smoother.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/visualize.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/pathPicker.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/dubins.cpp #Andrew Walker
     ${CMAKE_CURRENT_SOURCE_DIR}/src/dynamicvoronoi.cpp #Boris Lau, Christoph Sprunk, Wolfram Burgard
     ${CMAKE_CURRENT_SOURCE_DIR}/src/bucketedqueue.cpp #Boris Lau, Christoph Sprunk, Wolfram Burgard
@@ -47,6 +48,7 @@ set(HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/include/helper.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/constants.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/lookup.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/pathPicker.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/gradient.h #Andrew Noske
     ${CMAKE_CURRENT_SOURCE_DIR}/include/dubins.h #Andrew Walker
     ${CMAKE_CURRENT_SOURCE_DIR}/include/dynamicvoronoi.h #Boris Lau, Christoph Sprunk, Wolfram Burgard

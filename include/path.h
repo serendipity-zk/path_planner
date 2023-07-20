@@ -76,6 +76,7 @@ class Path {
   */
   void addVehicle(const Node3D& node, int i);
 
+  nav_msgs::Path getPath() const { return path; }
   // ______________
   // PUBLISH METHODS
 

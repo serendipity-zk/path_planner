@@ -34,9 +34,9 @@ static const bool coutDEBUG = false;
 /// A flag for the mode (true = manual; false = dynamic). Manual for static map or dynamic for dynamic map.
 static const bool manual = true;
 /// A flag for the visualization of 3D nodes (true = on; false = off)
-static const bool visualization = true && manual;
+static const bool visualization = false && manual;
 /// A flag for the visualization of 2D nodes (true = on; false = off)
-static const bool visualization2D = true && manual;
+static const bool visualization2D = false && manual;
 /// A flag to toggle reversing (true = on; false = off)
 static const bool reverse = true;
 /// A flag to toggle the connection of the path via Dubin's shot (true = on; false = off)
@@ -56,15 +56,15 @@ static const bool twoD = true;
 // GENERAL CONSTANTS
 
 /// [#] --- Limits the maximum search depth of the algorithm, possibly terminating without the solution
-static const int iterations = 30000;
+static const int iterations = 3000;
 /// [m] --- Uniformly adds a padding around the vehicle
-static const double bloating = 2;
+static const double bloating = 1.5;
 /// [m] --- The width of the vehicle
-static const double width = 3.3 + 2 * bloating;
+static const double width = 3.5 + 2 * bloating;
 /// [m] --- The length of the vehicle
 static const double length = 8 + 2 * bloating;
 /// [m] --- The minimum turning radius of the vehicle
-static const float r = 15;
+static const float r = 12;
 /// [m] --- The number of discretizations in heading
 static const int headings = 72;
 // static const int headings = 144;

@@ -1,4 +1,4 @@
-image: empty_80.png
+image: 3_80.png
 resolution: 1
 origin: [0.0, 0.0, 0.0]
 occupied_thresh: 0.1

@@ -1,4 +1,7 @@
 #include "planner.h"
+#include "pathPicker.h"
+#include <future>
+#include <vector>
 
 using namespace HybridAStar;
 //###################################################
@@ -198,7 +201,41 @@ void Planner::plan() {
     path.clear();
     smoothedPath.clear();
     // FIND THE PATH
-    Node3D* nSolution = Algorithm::hybridAStar(nStart, nGoal, nodes3D, nodes2D, width, height, configurationSpace, dubinsLookup, visualization);
+    vector<Node3D> nGoals;
+    int dx[] = {0, 1, 0, -1, 0};
+    int dy[] = {0, 0, -1, 0, 1};
+    for (int i = 0; i < Constants::headings; ++i) {
+      Node3D g(nGoal.getX() + dx[i/Constants::headings], nGoal.getY() + dy[i/Constants::headings], Helper::normalizeHeadingRad(i * Constants::deltaHeadingRad), 0, 0, nullptr);
+      nGoals.push_back(g);
+    }
+    vector<future<Node3D*>> futures;
+    vector<Node3D*> nodes3DArr;
+    vector<Node2D*> nodes2DArr;
+    for (int i = 0; i < Constants::headings ; ++i) {
+      nodes3DArr.push_back(new Node3D[length]());
+      nodes2DArr.push_back(new Node2D[width * height]());
+    }
+    for (int i = 0; i < Constants::headings ; ++i) {
+      futures.push_back(std::async(std::launch::async, Algorithm::hybridAStar, std::ref(nStart), std::ref(nGoals[i]), 
+                                 nodes3DArr[i], nodes2DArr[i], width, height, std::ref(configurationSpace), 
+                                 dubinsLookup, std::ref(visualization)));
+    }
+    vector<Node3D*> solutions;
+    for (int i = 0; i < Constants::headings; ++i) {
+      solutions.push_back(futures[i].get());
+    }
+    vector<Path> paths;
+    for (int i = 0; i < Constants::headings; ++i) {
+      Path p;
+      smoother.tracePath(solutions[i]);
+      p.updatePath(smoother.getPath());
+      paths.push_back(p);
+    }
+    cout<<"start picking"<<endl;
+    int index = PathPicker::pickPath(paths, nGoal);
+    auto nSolution = solutions[index];
+    // Node3D* nSolution = Algorithm::hybridAStar(nStart, nGoal, nodes3D, nodes2D, width, height, configurationSpace, dubinsLookup, visualization);
+    // nSolution = Algorithm::hybridAStar(nStart, nGoal, nodes3D, nodes2D, width, height, configurationSpace, dubinsLookup, visualization);
     // TRACE THE PATH
     smoother.tracePath(nSolution);
     // CREATE THE UPDATED PATH
@@ -226,7 +263,10 @@ void Planner::plan() {
 
     delete [] nodes3D;
     delete [] nodes2D;
-
+    for (int i = 0; i < Constants::headings; ++i) {
+      delete [] nodes3DArr[i];
+      delete [] nodes2DArr[i];
+    }
   } else {
     std::cout << "missing goal or start" << std::endl;
   }
